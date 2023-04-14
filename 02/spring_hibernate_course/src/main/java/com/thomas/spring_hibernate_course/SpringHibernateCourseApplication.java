@@ -20,11 +20,42 @@ public class SpringHibernateCourseApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
 //			createStudent(studentDAO);
-//			createMultipleStudents(studentDAO);
+			createMultipleStudents(studentDAO);
 //			readStudent(studentDAO);
 //			queryForStudents(studentDAO);
-			queryForStudentsByLastname(studentDAO);
+//			queryForStudentsByLastname(studentDAO);
+//			updateStudent(studentDAO);
+//			deleteStudent(studentDAO);
+//			deleteAllStudents(studentDAO);
 		};
+	}
+
+	private void deleteAllStudents(StudentDAO studentDAO) {
+		System.out.println("Deleting All students");
+		studentDAO.deleteAll();
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		int studentId = 3;
+		System.out.println("Deleting student with ID:" + studentId);
+
+		studentDAO.delete(studentId);
+
+
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		int studentId = 1;
+		System.out.println("Getting student with ID:" + studentId);
+
+		Student myStudent = studentDAO.findById(studentId);
+
+		System.out.println("Updating student...");
+
+		myStudent.setFirstName("Scooby");
+		studentDAO.update(myStudent);
+
+		System.out.println("Updated student:" + myStudent);
 	}
 
 	private void queryForStudentsByLastname(StudentDAO studentDAO) {
